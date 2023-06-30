@@ -1,6 +1,7 @@
 <section class="orders-show">
   <header class="page-header">
     <h1>Order #<%= @order.id %></h1>
+    <h2>Thank You: <%= @order.email %> </h2>
   </header>
 
   <div class="order-summary jumbotron">
@@ -26,6 +27,10 @@
             <td><%= humanized_money_with_symbol(line_item.total_price_cents / 100) %></td>
           </tr>
         <% end %>
+        <tr>
+          <td colspan="3" class="text-right"><strong>Total:</strong></td>
+          <td><%= humanized_money_with_symbol(@order.total_cents / 100) %></td>
+        </tr>
       </tbody>
     </table>
   </div>
