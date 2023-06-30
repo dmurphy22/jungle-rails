@@ -1,5 +1,4 @@
 <section class="orders-show">
-
   <header class="page-header">
     <h1>Order #<%= @order.id %></h1>
   </header>
@@ -8,6 +7,28 @@
     <h4>Thank you for your order!</h4>
   </div>
 
-  <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary' %>
+  <div class="products">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Product</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Total Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @order.line_items.each_with_index do |line_item, index| %>
+          <tr>
+            <th scope="row"><%= index + 1 %></th>
+            <td><%= line_item.product.name %></td>
+            <td><%= line_item.quantity %></td>
+            <td><%= humanized_money_with_symbol(line_item.total_price_cents / 100) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
+  <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary' %>
 </section>
