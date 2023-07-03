@@ -13,6 +13,7 @@
       <thead>
         <tr>
           <th scope="col">#</th>
+          <th scope="col"></th>
           <th scope="col">Product</th>
           <th scope="col">Quantity</th>
           <th scope="col">Total Price</th>
@@ -22,13 +23,15 @@
         <% @order.line_items.each_with_index do |line_item, index| %>
           <tr>
             <th scope="row"><%= index + 1 %></th>
+            <th scope="row"><img src="<%= line_item.product.image.url %>" style="max-width: 75px;" /></th>
             <td><%= line_item.product.name %></td>
             <td><%= line_item.quantity %></td>
             <td><%= humanized_money_with_symbol(line_item.total_price_cents / 100) %></td>
           </tr>
         <% end %>
         <tr>
-          <td colspan="3" class="text-right"><strong>Total:</strong></td>
+          
+          <td colspan="4" class="text-right"><strong>Total:</strong></td>
           <td><%= humanized_money_with_symbol(@order.total_cents / 100) %></td>
         </tr>
       </tbody>
